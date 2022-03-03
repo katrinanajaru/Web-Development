@@ -15,7 +15,10 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $appointments =Appointment::latest()->paginate(3);
+        $appointmenttabless=Appointment::latest()->get();
+
+        return view('admin.appointments.index',compact('appointments','appointmenttabless'));
     }
 
     /**

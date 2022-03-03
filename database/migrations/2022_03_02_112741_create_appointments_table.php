@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Services;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,8 @@ return new class extends Migration
             $table->id();
             $table->string('date');
             $table->foreignIdFor(Services::class,'service_id');
+            $table->foreignIdFor(User::class,'user_id');
+            $table->string('description');
             $table->timestamps();
         });
     }

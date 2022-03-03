@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Services;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,10 @@ class AppointmentFactory extends Factory
         return [
 
             'date'=>$this->faker->date(),
-            'service_id'=>function(){return Services::all()->random();}
+            'service_id'=>function(){return Services::all()->random();},
+            'user_id'=>function(){return User::all()->random();},
+            'description'=>$this->faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+
 
         ];
     }
