@@ -55,7 +55,7 @@
                     <!-- Main row -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">appointments Offered</h3>
+                            <h3 class="card-title">Appointments Table</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -77,10 +77,10 @@
                                         <td>{{Str::limit($appointment->description,10)}}</td>
                                         <td>
                                             <div class="row">
-                                                <div class="div">
+                                                <div class="div mr-4">
                                                     <a href="{{route('appointments.show',$appointment->id)}}" class="btn btn-sm btn-info">View</a>
                                                 </div>
-                                                <div class="div">
+                                                <div class="div mr-0">
                                                     <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                                 </div>
                                             </div>

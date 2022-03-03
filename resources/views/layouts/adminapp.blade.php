@@ -65,8 +65,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy;  {{date('Y')}}<a href="#">Berbershop</a>.</strong>
+  <footer class="main-footer ">
+    <strong style="padding-left:30%">Copyright &copy;  {{date('Y')}}<a href="#">Berbershop</a>.</strong>
     All rights reserved.
   </footer>
 

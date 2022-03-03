@@ -19,7 +19,7 @@
 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
+          <div href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
@@ -28,7 +28,12 @@
                   {{Auth::user()->name}}
                   <span class="float-right text-sm text-success"><i >online</i></span>
                 </h3>
-                <p class="text-sm"></p>
+
+                <div>
+                    <a href="#" class="text-sm mt-4 btn btn-sm" >View Profile</a>
+                </div>
+
+
                 <a class="dropdown-item dropdown-footer btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -40,7 +45,7 @@
               </div>
             </div>
             <!-- Message End -->
-          </a>
+        </div>
       </li>
     </ul>
   </nav>

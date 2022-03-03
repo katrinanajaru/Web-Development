@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AppointmentController;
 
 /*
@@ -24,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Appointments
 Route::resource('appointments', AppointmentController::class);
+Route::resource('users', UserController::class);
