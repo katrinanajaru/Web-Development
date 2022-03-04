@@ -14,7 +14,7 @@ use App\Http\Controllers\AppointmentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-include_once("./myroutes.php") ;
+include_once("myroutes.php") ;
 Route::get('/', function () {
     return view('welcome');
 });
