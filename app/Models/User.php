@@ -58,7 +58,14 @@ class User extends Authenticatable
     {
         return Str::of($value)->upper() ;
     }
-    // public function isManager(){
-    //     return $this->role = 'manager';
-    // }
+
+    /**
+     * Get all of the payments for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'user_id', 'id');
+    }
 }
