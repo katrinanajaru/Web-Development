@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->decimal('amount');
-            $table->string('description');
+            $table->foreignIdFor(User::class,'employee_id');
+            $table->date("arrived_time")->nullable();
+            $table->date("leave_time")->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('attendances');
     }
 };
