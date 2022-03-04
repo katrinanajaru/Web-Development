@@ -17,7 +17,7 @@ class WalletFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'balance'=>$this->faker->numberBetween(2000,1000000)
         ];
     }
 }

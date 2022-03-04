@@ -17,9 +17,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
-        Services::factory(20)->create();
-        Appointment::factory(10)->create();
+        User::factory(50)->create();
+        $this->call([
+            AttendanceSeeder::class,
+            ServiceSeeder::class,
+            SubserviceSeeder::class,
+            AppointmentSeeder::class,
+            PaymentSeeder::class,
+            BillingSeeder::class,
+            WalletSeeder::class
+
+        ]);
+
 
     }
 }

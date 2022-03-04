@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subservice;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,6 @@ class SubserviceSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Subservice::factory(150)->create();
     }
 }

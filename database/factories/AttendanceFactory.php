@@ -20,7 +20,7 @@ class AttendanceFactory extends Factory
         return [
             'arrived_time'=>$this->faker->date(),
             'leave_time'=>$this->faker->date(),
-            'employee_id'=>function(){return  User::where('role','employee') ->random();},
+            'employee_id'=>function(){return  User::where('role','employee')->get() ->random();}
 
         ];
     }

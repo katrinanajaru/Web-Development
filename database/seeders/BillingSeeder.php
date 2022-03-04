@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Billing;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,6 @@ class BillingSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Billing::factory(40)->create();
     }
 }

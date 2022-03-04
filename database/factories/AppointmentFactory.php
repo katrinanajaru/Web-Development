@@ -25,8 +25,7 @@ class AppointmentFactory extends Factory
             'date'=>$this->faker->date($max= Carbon::now()->subDays(50) ),
             'subservice_id'=>function(){return Subservice::all()->random();},
             'user_id'=>function(){return User::all()->random();},
-            'employee_id'=>function(){return User::where('role','employee') ->random();},
-            'phone'=> $this->faker->phoneNumber() ,
+            'employee_id'=>function(){return User::where('role','employee')->get() ->random();},
             'status'=>$this->faker->randomElement(['pending','rejected','approved','completed']),
             'description'=>$this->faker->paragraph($nbSentences = 3, $variableNbSentences = true),
 
