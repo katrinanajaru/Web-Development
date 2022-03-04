@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AppointmentController;
 
 /*
@@ -14,7 +13,7 @@ use App\Http\Controllers\AppointmentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-include_once("myroutes.php") ;
+include_once "myroutes.php"  ;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,4 +24,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Appointments
 Route::resource('appointments', AppointmentController::class);
-Route::resource('users', UserController::class);

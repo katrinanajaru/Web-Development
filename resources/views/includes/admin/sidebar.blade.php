@@ -196,31 +196,27 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+
+                        <i class="fa fa-users" aria-hidden="true"></i>
                         <p>
-                            Tables
+                            Users
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Simple Tables</p>
+                            <a href="{{route('users.index')}}" class="nav-link">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <p>View Users</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>DataTables</p>
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                <p>Add User</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>jsGrid</p>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
             </ul>
