@@ -15,7 +15,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $attendances = attendance::latest()->get();
+        return view('admin.attendance.attendance',compact('attendances')) ;
     }
 
     /**
