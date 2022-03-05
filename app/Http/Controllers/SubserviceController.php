@@ -8,6 +8,10 @@ use App\Http\Requests\UpdateSubserviceRequest;
 
 class SubserviceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,8 @@ class SubserviceController extends Controller
      */
     public function index()
     {
-        //
+        $subservices = Subservice::latest()->get();
+        return view('admin.services.index',compact('subservices'));
     }
 
     /**
@@ -25,7 +30,8 @@ class SubserviceController extends Controller
      */
     public function create()
     {
-        //
+        $services = Subservice::latest()->get();
+        return view('admin.subservices.create',compact('services'));
     }
 
     /**
@@ -36,7 +42,54 @@ class SubserviceController extends Controller
      */
     public function store(StoreSubserviceRequest $request)
     {
-        //
+        $this->validate($request,[
+
+            'name'=>['required','max:250'],
+            'amount'=>['required','string'],
+            'sub_service'=>['required','string','max:5'],
+            'description'=>['required','string','max:500']
+        ]);
+        if (file_exists($request->file('image'))) {
+            // dd($request);
+             // Get filename with extension
+             $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+
+
+             // Get extension
+             $extension = $request->file('image')->getClientOriginalExtension();
+
+             // Create new filename
+             $filenameToStore = (string) Str::uuid() . '_' . time() . '.' . $extension;
+
+             // Uplaod image
+
+             $path = $request->file('image')->storeAs('public/subservices', $filenameToStore);
+             $avatar  = $filenameToStore;
+            }
+
+             $post = new Subservice();
+
+            $post->name = $request->name;
+            $post->image = $avatar ;
+            $post->service_id=$request->service_id;
+            $post->description=$request->description;
+            $post->price=$request->price;
+
+            $validate=$post->save();
+
+            if ($validate) {
+
+                return back()->with('success','You have successfully added the sub-service');
+
+            }
+            else {
+                return back()->with('error','An error occured , please try again or contact the administrator');
+            }
+
+
+
+
     }
 
     /**
@@ -47,7 +100,8 @@ class SubserviceController extends Controller
      */
     public function show(Subservice $subservice)
     {
-        //
+        $subservice=Subservice::find($subservice);
+        return view('admin.subservices.show',compact('subservice'));
     }
 
     /**
@@ -58,7 +112,8 @@ class SubserviceController extends Controller
      */
     public function edit(Subservice $subservice)
     {
-        //
+        $subservice=Subservice::find($subservice);
+        return view('admin.subservices.show',compact('subservice'));
     }
 
     /**

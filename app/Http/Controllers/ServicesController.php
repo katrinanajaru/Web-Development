@@ -15,7 +15,8 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        //
+        $services=Services::latest()->get();
+        return view('admin.services.index',compact('services'));
     }
 
     /**
@@ -25,7 +26,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.services.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class ServicesController extends Controller
      */
     public function show(Services $services)
     {
-        //
+        $service=Services::find($services);
+        return view('admin.services.show',compact('service'));
     }
 
     /**
@@ -58,7 +60,8 @@ class ServicesController extends Controller
      */
     public function edit(Services $services)
     {
-        //
+        $service=Services::find($services);
+        return view('admin.services.edit',compact('service'));
     }
 
     /**
@@ -81,6 +84,7 @@ class ServicesController extends Controller
      */
     public function destroy(Services $services)
     {
-        //
+        $del = Service::find($service);
+        $del->delete();
     }
 }
