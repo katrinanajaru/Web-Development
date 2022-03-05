@@ -73,6 +73,7 @@
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Payments</a></li>
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#attendance" data-toggle="tab">attendance</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -230,6 +231,34 @@
                       </div>
                     </form>
                   </div>
+
+                  <div class="tab-pane" id="attendance" >
+
+                  <table class="table table-striped table-inverse">
+                    <thead class="thead-inverse">
+                      <tr>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($user->attedances->take(5) as $attedance)
+                        <tr>
+                            <td scope="row"> {{ $attedance->arrived_time}} </td>
+                            <td>{{ $attedance->leave_time}}  </td>
+                            <td> <a href="#" class="btn btn-primary" > <i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
+                          </tr>
+
+                        @endforeach
+
+
+                      </tbody>
+
+                  </table>
+                  <a class="btn btn-primary btn-block" href="#"> View More </a>
+                  </div>
+
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
