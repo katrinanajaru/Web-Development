@@ -117,34 +117,23 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
+
                         <p>
-                            Forms
+                            Attendance
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('attendance.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>General Elements</p>
+                                <p>View</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Advanced Elements</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Editors</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Validation</p>
+                            <a href="{{ route('attendance.create')}}" class="nav-link">
+                                <i class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                                <p>Attendance</p>
                             </a>
                         </li>
                     </ul>
@@ -174,6 +163,29 @@
 
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+
+                        <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                        <p>
+                            Wallet
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('wallet.index')}}" class="nav-link">
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                <p>View </p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -12,6 +12,8 @@ class Appointment extends Model
 {
     use HasFactory;
 
+    protected $guarded = [] ;
+
     /**
      * Get the service that owns the Appointment
      *
@@ -19,7 +21,16 @@ class Appointment extends Model
      */
     public function service(): BelongsTo
     {
-        return $this->belongsTo(Services::class, 'services_id', 'id');
+        return $this->belongsTo(Subservice::class,'subservice_id','id');
+    }
+    /**
+     * Get the employee_assigned that owns the Appointment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function employee_assigned(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'employee_id', 'id');
     }
     /**
      * Get the user that owns the Appointment

@@ -1,38 +1,40 @@
 @extends('layouts.adminapp')
 @section('content')
 
-<section class="content">
-    <div  class="content-wrapper" >
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Wallet</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Wallet </li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-        <section class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1>Profile</h1>
-                </div>
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active">User Profile</li>
-                  </ol>
-                </div>
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
-
-          <div class="container-fluid">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{$total_users}}</h3>
+                            <h3>{{ number_format($balance->balance) }}</h3>
 
-                            <p>Total Users</p>
+                            <p>Wallet Balance</p>
                         </div>
                         <div class="icon">
-                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <i class="ion ion-bag"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -42,13 +44,12 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{$total_managers}}</h3>
+                            <h3>{{ number_format($moneyIn) }}</h3>
 
-                            <p>Managers</p>
+                            <p>Money In</p>
                         </div>
                         <div class="icon">
-
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="ion ion-stats-bars"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -58,9 +59,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3> {{$total_employees}} </h3>
+                            <h3> {{ number_format($moneyOut)  }} </h3>
 
-                            <p>Employees</p>
+                            <p>Money Out</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -71,11 +72,11 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-secondary">
+                    <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3> {{$total_customers}} </h3>
+                            <h3> {{ $transactions}} </h3>
 
-                            <p>Customers</p>
+                            <p>Transactions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -93,44 +94,34 @@
 
                 <div class="card col-md-12">
                     <div class="card-header">
-                        <h3 class="card-title">All Users</h3>
+                        <h3 class="card-title">Transactions</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Member </th>
-                                    <th>Action</th>
+                                    <th>Money In</th>
+                                    <th>Money Out</th>
+                                    <th>Time</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($users as $user)
+                                @foreach ($wallets as $wallet)
                                 <tr>
-                                    <td> {{ $user->name}} </td>
-                                    <td> {{ $user->phone}} </td>
-                                    <td> {{ $user->role}} </td>
-                                    <td> {{ $user->created_at->format("d/m/Y")}} </td>
-                                    <td>
-                                        <a href="{{route('users.show',$user)}}" class="btn btn-sm btn-info"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
-
-                                         </td>
-
+                                    <td> {{ number_format($wallet->moneyin) }} </td>
+                                    <td> {{ number_format($wallet->moneyout) }} </td>
+                                    <td> {{ $wallet->created_at}} </td>
                                 </tr>
                                 @endforeach
 
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Member </th>
-                                    <th>Action</th>
+                                    <th>Money In</th>
+                                    <th>Money Out</th>
+                                    <th>Time</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -141,9 +132,10 @@
             </div>
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
 
-    </div>
 
-</section>
 
 @endsection
