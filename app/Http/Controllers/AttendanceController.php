@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
+use App\Models\User;
 
 class AttendanceController extends Controller
 {
@@ -26,7 +27,8 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        $employees = User::where('role','employee')->latest()->get();
+        return view('admin.attendance.create',compact('employees')) ;
     }
 
     /**
@@ -37,7 +39,15 @@ class AttendanceController extends Controller
      */
     public function store(StoreattendanceRequest $request)
     {
-        //
+        $data = $request->validated() ;
+
+
+        attendance::create($data) ;
+
+        return redirect()->route('attendance.create')->with('success',"stored") ;
+
+
+
     }
 
     /**

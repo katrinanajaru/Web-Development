@@ -175,6 +175,12 @@
                                 <p>View</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('attendance.create')}}" class="nav-link">
+                                <i class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                                <p>Attendance</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
