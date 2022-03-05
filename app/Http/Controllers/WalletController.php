@@ -15,7 +15,13 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //
+        $wallets = Wallet::all() ;
+        $balance = Wallet::latest()->first();
+        $moneyIn = Wallet::pluck('moneyin')->sum() ;
+        // dd($moneyIn) ;
+        $moneyOut = Wallet::pluck('moneyout')->sum() ;
+        $transactions = Wallet::count() ;
+        return view('admin.wallet.index',compact('wallets','balance','moneyIn','moneyOut','transactions')) ;
     }
 
     /**

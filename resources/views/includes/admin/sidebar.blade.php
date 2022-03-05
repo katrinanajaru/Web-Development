@@ -208,6 +208,29 @@
 
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+
+                        <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                        <p>
+                            Wallet
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('wallet.index')}}" class="nav-link">
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                <p>View </p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
