@@ -13,7 +13,7 @@ class UpdateSubserviceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateSubserviceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'name'=>['required','max:250'],
+            'price'=>['required','string'],
+            'service_id'=>['required','string','max:5'],
+            'description'=>['required','string','max:500']
         ];
     }
 }

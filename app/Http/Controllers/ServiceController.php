@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
@@ -15,7 +16,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services=Service::latest()->get();
+        return view('admin.services.index',compact('services'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.services.create');
     }
 
     /**
@@ -36,7 +38,11 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        //
+        $post=$request->validated();
+
+        Service::create($post);
+
+        return back()->with('success','You have successfully added the service');
     }
 
     /**
@@ -47,7 +53,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('admin.services.show',compact('service'));
     }
 
     /**
@@ -58,7 +64,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('admin.services.edit',compact('service'));
     }
 
     /**
@@ -70,7 +76,18 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $post=$request->validated();
+
+        $service->update($post);
+
+        if($service)
+        {
+        return back()->with('success','You have successfully updated the service');
+        }
+        else
+        {
+           return  back()->with('error','An error occured, please try again or contact the manager');
+        }
     }
 
     /**
@@ -81,6 +98,13 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        if($service){
+            return redirect()->route('services.index')->with('success','You have successfully deleted the record');
+        }
+        else{
+            return back()->with('error','An error occured, please try again or contact the manager!');
+        }
     }
 }

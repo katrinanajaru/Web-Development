@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Models\Subservice;
 use Illuminate\Support\Str;
 use App\Http\Requests\StoreSubserviceRequest;
@@ -21,7 +22,7 @@ class SubserviceController extends Controller
     public function index()
     {
         $subservices = Subservice::latest()->get();
-        return view('admin.services.index',compact('subservices'));
+        return view('admin.subservices.index',compact('subservices'));
     }
 
     /**
@@ -98,7 +99,6 @@ class SubserviceController extends Controller
      */
     public function show(Subservice $subservice)
     {
-        $subservice=Subservice::find($subservice);
         return view('admin.subservices.show',compact('subservice'));
     }
 
@@ -110,8 +110,8 @@ class SubserviceController extends Controller
      */
     public function edit(Subservice $subservice)
     {
-        $subservice=Subservice::find($subservice);
-        return view('admin.subservices.show',compact('subservice'));
+        $services = Service::all();
+        return view('admin.subservices.edit',compact('subservice','services'));
     }
 
     /**
@@ -123,7 +123,41 @@ class SubserviceController extends Controller
      */
     public function update(UpdateSubserviceRequest $request, Subservice $subservice)
     {
-        //
+        $post = $request->validated();
+
+        if (file_exists($request->file('image'))) {
+            // dd($request);
+             // Get filename with extension
+             $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+
+
+             // Get extension
+             $extension = $request->file('image')->getClientOriginalExtension();
+
+             // Create new filename
+             $filenameToStore = (string) Str::uuid() . '_' . time() . '.' . $extension;
+
+             // Uplaod image
+
+             $path = $request->file('image')->storeAs('public/subservices', $filenameToStore);
+             $avatar  = $filenameToStore;
+             $post['image'] =$avatar;
+            }
+
+            $subservice->update($post);
+
+            if ($post) {
+
+                return back()->with('success','You have successfully updated the sub-service');
+
+            }
+            else {
+                return back()->with('error','An error occured , please try again or contact the administrator');
+            }
+
+
+
     }
 
     /**
@@ -134,6 +168,17 @@ class SubserviceController extends Controller
      */
     public function destroy(Subservice $subservice)
     {
-        //
+        $subservice->delete();
+
+        if($subservice){
+
+            return redirect()->route('subservices.index')->with('success','You have successfully deleted the sub-service');
+
+        }else{
+
+            return back()->with('error','An error occured , please try again or contact the administrator');
+
+
+        }
     }
 }

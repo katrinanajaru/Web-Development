@@ -102,7 +102,6 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Amount</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -112,18 +111,14 @@
                                 @foreach ($services as $service)
                                 <tr>
                                     <td>{{$service->name}}</td>
-                                    <td>{{$service->amount}}</td>
-                                    <td>{{Str::limit($service->description),1}}</td>
+                                    <td>{{Str::limit($service->description,100)}}</td>
                                     <td>
                                         <div class="row">
-                                            <div class="div">
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
+                                            <div class="mr-2">
+                                                <a href="{{route('services.show',$service->id)}}" class="btn btn-sm btn-info">View</a>
                                             </div>
                                             <div>
-                                                <a href="" class="btn btn-sm btn-warning">Edit</a>
-                                            </div>
-                                            <div class="div">
-                                                <a href="#" class="btn btn-sm btn-danger" >Delete</a>
+                                                <a href="{{route('services.edit',$service->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                             </div>
                                         </div>
 
@@ -135,7 +130,6 @@
                             <tfoot>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Amount</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>

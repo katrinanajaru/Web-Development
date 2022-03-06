@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SubserviceController;
 use App\Http\Controllers\AppointmentController;
 
@@ -26,6 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('appointments', AppointmentController::class);// Appointments
-Route::resource('services', ServicesController::class);// Services
+Route::resource('services', ServiceController::class);// Services
 Route::resource('subservices', SubserviceController::class);// subservice
 

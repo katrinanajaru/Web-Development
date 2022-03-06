@@ -5,6 +5,21 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <div class="content-header">
+                <div class="container-fluid">
+                  <div class="row mb-2">
+                    <div class="col-sm-6">
+                      <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                      <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Services </li>
+                      </ol>
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+              </div>
 
             <!-- Main row -->
             <div class="row">
@@ -21,7 +36,6 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Amount</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -31,18 +45,14 @@
                                 @foreach ($services as $service)
                                 <tr>
                                     <td>{{$service->name}}</td>
-                                    <td>{{$service->amount}}</td>
-                                    <td>{{Str::limit($service->description),1}}</td>
+                                    <td>{{Str::limit($service->description,100)}}</td>
                                     <td>
                                         <div class="row">
-                                            <div class="div">
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
-                                            </div>
-                                            <div>
-                                                <a href="" class="btn btn-sm btn-warning">Edit</a>
+                                            <div class="mr-4">
+                                                <a href="{{route('services.show',$service->id)}}" class="btn btn-sm btn-info">view</a>
                                             </div>
                                             <div class="div">
-                                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                <a href="{{route('services.edit',$service->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                             </div>
                                         </div>
 
@@ -54,7 +64,6 @@
                             <tfoot>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Amount</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
