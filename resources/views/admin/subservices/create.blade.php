@@ -60,7 +60,7 @@
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Service</label>
-                                                <select class="form-control" name="description" value="{{old('description')}}" >
+                                                <select class="form-control" name="service_id" value="{{old('service_id')}}" >
                                                     <option >Select Service</option>
                                                    @foreach ($services as $service)
                                                     <option value="{{$service->id}}">{{$service->name}}</option>

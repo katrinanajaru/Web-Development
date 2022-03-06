@@ -28,3 +28,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('appointments', AppointmentController::class);// Appointments
 Route::resource('services', ServicesController::class);// Services
 Route::resource('subservices', SubserviceController::class);// subservice
+

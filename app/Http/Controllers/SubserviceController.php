@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subservice;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreSubserviceRequest;
 use App\Http\Requests\UpdateSubserviceRequest;
 
@@ -42,13 +43,10 @@ class SubserviceController extends Controller
      */
     public function store(StoreSubserviceRequest $request)
     {
-        $this->validate($request,[
 
-            'name'=>['required','max:250'],
-            'amount'=>['required','string'],
-            'sub_service'=>['required','string','max:5'],
-            'description'=>['required','string','max:500']
-        ]);
+
+        $post = $request->validated();
+
         if (file_exists($request->file('image'))) {
             // dd($request);
              // Get filename with extension

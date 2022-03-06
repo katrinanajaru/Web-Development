@@ -41,6 +41,7 @@
   @include('includes.admin.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
+  @include('includes.messages')
   @yield('content')
   <!-- /.content-wrapper -->
   <footer class="main-footer ">

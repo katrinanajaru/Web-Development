@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignIdFor(Service::class,'service_id');
             $table->decimal("price")->nullable();
+            $table->string('image')->nullable();
             $table->longText("description")->nullable();
 
             $table->timestamps();
