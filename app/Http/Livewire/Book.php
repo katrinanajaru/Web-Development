@@ -12,11 +12,11 @@ class Book extends Component
     public $subservices=[];
     public $subservice;
 
-    public function mount($service,$subservice){
+    // public function mount($service,$subservice){
 
-        $this->service=$service;
-        $this->subservice=$subservice;
-    }
+    //     $this->service=$service;
+    //     $this->subservice=$subservice;
+    // }
 
     public function render()
     {
@@ -25,7 +25,6 @@ class Book extends Component
         if(!empty($this->service)) {
             $this->subservices= Subservice::where('service_id', $this->service)->get();
         }
-        return view('livewire.book')
-            ->withServices(Service::orderBy('name','Asc')->get());
+        return view('livewire.book')->withServices(Service::orderBy('name','Asc')->get());
     }
 }
