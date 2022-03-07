@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subservice extends Model
 {
@@ -28,5 +29,14 @@ class Subservice extends Model
     public function service()
     {
         return $this->belongsTo(service::class, 'service_id', 'id');
+    }
+    /**
+     * Get all of the comments for the Subservice
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class, 'subservice_id', 'local_key');
     }
 }

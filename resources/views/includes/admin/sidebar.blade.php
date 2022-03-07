@@ -11,13 +11,15 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
+                <a href="{{route('users.show',Auth::user()->id)}}">
                 <img src="{{asset('/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
                     alt="User Image">
+                </a>
 
             </div>
 
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                <a href="{{route('users.show',Auth::User()->id)}}" class="d-block">{{Auth::user()->name}}</a>
             </div>
             <span class="float-right text-sm text-success"><i >online</i></span>
 

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Service;
+use App\Models\Subservice;
 use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
@@ -28,7 +31,9 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        return view('admin.appointments.create');
+        $services=Service::all();
+        $subservices  =Subservice::paginate(12);
+        return view('admin.appointments.create',compact('services','subservices'));
     }
 
     /**
@@ -39,7 +44,14 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        //
+        $post=$request->validated();
+        $post['employee_id']=User::where('role','employee')->get()->random();
+
+        Appointment::create($post);
+
+        return back()->with('success','You have successfully booked your selected service');
+
+
     }
 
     /**
@@ -61,7 +73,7 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        return view('admin.appointments.edit',compact('appointment'));
     }
 
     /**

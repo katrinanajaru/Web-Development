@@ -30,7 +30,7 @@
                 </h3>
 
                 <div>
-                    <a href="#" class="text-sm mt-4 btn btn-sm" >View Profile</a>
+                    <a href="{{route('users.show',Auth::User()->id)}}" class="text-sm mt-4 btn btn-sm" >View Profile</a>
                 </div>
 
 

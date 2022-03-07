@@ -19,7 +19,7 @@ class Appointment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function service(): BelongsTo
+    public function subservice(): BelongsTo
     {
         return $this->belongsTo(Subservice::class,'subservice_id','id');
     }
