@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{$subservice->name}}</td>
                                     <td>{{$subservice->price}}</td>
-                                    <td><img src="/subservices/{{$subservice->image}}" class="img-circle elevation-2"
+                                    <td><img src="/storage/subservices/{{$subservice->image}}" class="img-circle elevation-2"
                                         alt="sub-service"></td>
                                     <td>
                                         <div class="row">

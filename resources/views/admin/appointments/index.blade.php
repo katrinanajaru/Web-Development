@@ -77,9 +77,9 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>User</th>
                                             <th>Name</th>
                                             <th>Date</th>
-                                            <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -88,20 +88,13 @@
                                         @foreach ($appointmenttabless as $appointment)
                                         <tr>
                                             <td>{{$appointment->user->name}}</td>
+                                            <td>{{$appointment->subservice->name}}</td>
                                             <td>{{$appointment->date}}</td>
-                                            <td>{{$appointment->created_at}}</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="div mr-4">
                                                         <a href="{{route('appointments.show',$appointment->id)}}"
-                                                            class="btn btn-sm btn-info">View</a>
-                                                    </div>
-                                                    <div class="div mr-4">
-                                                        <a href="{{route('appointments.edit',$appointment->id)}}"
-                                                            class="btn btn-sm btn-success">Edit</a>
-                                                    </div>
-                                                    <div class="div mr-0">
-                                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                            class="btn btn-sm btn-info"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                                                     </div>
                                                 </div>
 
@@ -112,9 +105,9 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th>User</th>
                                             <th>Name</th>
                                             <th>Date</th>
-                                            <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
