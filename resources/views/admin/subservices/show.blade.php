@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <div class="col-12">
-                            <img src="{{asset('/admin/dist/img/prod-1.jpg')}}" class="product-image"
+                            <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}}" class="product-image"
                                 alt="Sub-service Image">
                         </div>
                     </div>
