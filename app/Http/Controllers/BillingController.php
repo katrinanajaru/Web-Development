@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Billing;
 use App\Http\Requests\StoreBillingRequest;
 use App\Http\Requests\UpdateBillingRequest;
+use App\Models\Wallet;
 
 class BillingController extends Controller
 {
@@ -76,6 +77,13 @@ class BillingController extends Controller
                 'status'=> $request->status
             ]
         );
+        if ($request->status == "approved") {
+            # code...
+            $wallet = new Wallet();
+            $wallet->balance -= $billing->amount ;
+            $wallet->moneyout = $billing->amount ;
+            $wallet->save() ;
+        }
         return back()->with('success',"Billing ". $request->status ) ;
     }
 

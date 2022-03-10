@@ -84,7 +84,7 @@
                                                                                     @method("PUT")
                                                                                     <button type="submit" class="btn btn-primary">Approve</button>
                                                                                 </form>
-                                                                                @if ($billing->status != "rejected")
+                                                                                @if ($billing->status != "rejected" || $billing->status != "approved")
                                                                                 <form class="col-md-4" action="{{route('billings.update',$billing)}}" method="post">
                                                                                     <input type="hidden" name="status" value="rejected">
                                                                                     @csrf
