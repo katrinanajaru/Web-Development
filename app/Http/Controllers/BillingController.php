@@ -15,7 +15,8 @@ class BillingController extends Controller
      */
     public function index()
     {
-        //
+        $billings = Billing::all();
+        return view('admin.Billings.index',compact('billings')) ;
     }
 
     /**
@@ -70,7 +71,12 @@ class BillingController extends Controller
      */
     public function update(UpdateBillingRequest $request, Billing $billing)
     {
-        //
+        $billing->update(
+            [
+                'status'=> $request->status
+            ]
+        );
+        return back()->with('success',"Billing ". $request->status ) ;
     }
 
     /**
@@ -81,6 +87,7 @@ class BillingController extends Controller
      */
     public function destroy(Billing $billing)
     {
-        //
+        $billing->delete() ;
+        return back()->with('success',"Billing deleted" ) ;
     }
 }
