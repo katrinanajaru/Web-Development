@@ -113,8 +113,11 @@ class AppointmentController extends Controller
             'CheckoutRequestID'=> $response['CheckoutRequestID'],
             'ResponseCode'=> $response['ResponseCode'],
             'ResponseDescription'=> $response['ResponseDescription'],
-            'CustomerMessage'=> $response['CustomerMessage']
+            'CustomerMessage'=> $response['CustomerMessage'],
+            'amount'=>$subservice->price
         ]) ;
+        $appointment->status = "completed" ;
+        $appointment->save();
         return back()->with('success', $response['CustomerMessage']) ;
 
     }
