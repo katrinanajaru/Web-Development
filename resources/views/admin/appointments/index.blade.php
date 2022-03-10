@@ -80,6 +80,7 @@
                                             <th>User</th>
                                             <th>Name</th>
                                             <th>Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -90,11 +91,24 @@
                                             <td>{{$appointment->user->name}}</td>
                                             <td>{{$appointment->subservice->name}}</td>
                                             <td>{{$appointment->date}}</td>
+                                            <td>{{$appointment->status}}</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="div mr-4">
                                                         <a href="{{route('appointments.show',$appointment->id)}}"
                                                             class="btn btn-sm btn-info"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                                                    </div>
+                                                    <div class="div mr-4">
+
+
+                                                            <a class="btn btn-sm  btn-primary" href="#" onclick="event.preventDefault();
+                                                            document.getElementById('pay-form').submit();">
+                                                                            {{ __('Pay') }}
+                                                                        </a>
+
+                                                                        <form id="pay-form" action="{{ route('payAppointment',$appointment) }}" method="POST" style="display: none;">
+                                                                            @csrf
+                                                                        </form>
                                                     </div>
                                                 </div>
 

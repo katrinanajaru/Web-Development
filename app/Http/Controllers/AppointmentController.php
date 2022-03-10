@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\MpesaGateway;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Subservice;
 use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -49,7 +51,7 @@ class AppointmentController extends Controller
 
         Appointment::create($post);
 
-        return back()->with('success','You have successfully booked your selected service');
+        return redirect()-> route('appointments.index')->with('success','You have successfully booked your selected service');
 
 
     }
@@ -97,5 +99,23 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    public function payAppointment(Appointment $appointment, MpesaGateway $mpesa)
+    {
+        # stk push for payment
+
+        $subservice = $appointment->subservice ;
+        $response = $mpesa->lipaNaMPesaOnlineAPI( Auth::user()->phone,$subservice->price) ;
+        $makepay = $subservice->payments()->create([
+            'user_id'=> auth()->user()->id ,
+            'MerchantRequestID'=> $response['MerchantRequestID'],
+            'CheckoutRequestID'=> $response['CheckoutRequestID'],
+            'ResponseCode'=> $response['ResponseCode'],
+            'ResponseDescription'=> $response['ResponseDescription'],
+            'CustomerMessage'=> $response['CustomerMessage']
+        ]) ;
+        return back()->with('success', $response['CustomerMessage']) ;
+
     }
 }
