@@ -37,7 +37,8 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th>image</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,6 +50,7 @@
                                     <td>{{$subservice->price}}</td>
                                     <td><img src="/storage/subservices/{{$subservice->image}}" class="img-circle elevation-2"
                                         alt="sub-service"></td>
+                                    <td>{{Str::limit($subservice->description,80)}}</td>
                                     <td>
                                         <div class="row">
                                             <div class="mr-4">
@@ -68,7 +70,8 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th>image</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
