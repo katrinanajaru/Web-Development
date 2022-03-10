@@ -93,13 +93,13 @@
                 {{-- data --}}
                 <!-- /.card -->
 
-                <div class="card">
+                <div class="card row">
                     <div class="card-header">
                         <h3 class="card-title">Services Offered</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                    <div class="card-body row ">
+                        <table id="example1" class="table table-bordered table-striped col-12 ">
                             <thead>
                                 <tr>
                                     <th>Name</th>

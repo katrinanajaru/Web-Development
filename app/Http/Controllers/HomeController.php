@@ -28,8 +28,9 @@ class HomeController extends Controller
     {
         $noofemployees = User::where('role','employee')->count();
         $noofclients=User::where('role','client')->count();
-        $noofsubservices=Subservice::get()->count();
-        $noofservices=Service::get()->count();
+        $noofsubservices= Subservice::count();
+        // dd($noofclients) ;
+        $noofservices=Service::count();
         $services = Service::latest()->get();
         return view('admin.home',compact('services','noofemployees','noofclients','noofservices','noofsubservices'));
     }
