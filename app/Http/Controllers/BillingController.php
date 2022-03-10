@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Billing;
 use App\Http\Requests\StoreBillingRequest;
 use App\Http\Requests\UpdateBillingRequest;
+use App\Models\Wallet;
 
 class BillingController extends Controller
 {
@@ -15,7 +16,8 @@ class BillingController extends Controller
      */
     public function index()
     {
-        //
+        $billings = Billing::all();
+        return view('admin.Billings.index',compact('billings')) ;
     }
 
     /**
@@ -25,7 +27,7 @@ class BillingController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.Billings.create') ;
     }
 
     /**
@@ -36,7 +38,8 @@ class BillingController extends Controller
      */
     public function store(StoreBillingRequest $request)
     {
-        //
+        Billing::create($request->validated()) ;
+         return redirect()->route('billings.index')->with('success',"Billing created");
     }
 
     /**
@@ -70,7 +73,19 @@ class BillingController extends Controller
      */
     public function update(UpdateBillingRequest $request, Billing $billing)
     {
-        //
+        $billing->update(
+            [
+                'status'=> $request->status
+            ]
+        );
+        if ($request->status == "approved") {
+            # code...
+            $wallet = new Wallet();
+            $wallet->balance -= $billing->amount ;
+            $wallet->moneyout = $billing->amount ;
+            $wallet->save() ;
+        }
+        return back()->with('success',"Billing ". $request->status ) ;
     }
 
     /**
@@ -81,6 +96,7 @@ class BillingController extends Controller
      */
     public function destroy(Billing $billing)
     {
-        //
+        $billing->delete() ;
+        return back()->with('success',"Billing deleted" ) ;
     }
 }
