@@ -57,19 +57,29 @@ class UserController extends Controller
     {
         // return $request ;
        $data = $request->validate([
+            'name'=>["required",'string'] ,
             'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore($user->id)],
             'phone' => ['required', 'max:255',  Rule::unique('users')->ignore($user->id)],
-            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024']
+            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'current_password' =>["required"]
         ]) ;
 
-        if (! isset($request['current_password']) || !  Hash::check($request['current_password'], $user->password)) {
+        if ( ! Hash::check($request['current_password'], $user->password)) {
             Session::flash('error','The provided password does not match your current password.' ) ;
             // $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
+            return back();
         }
 
-        $user->update($data) ;
 
-        Session::flash('success','The provided password does not match your current password.' ) ;
+        // return $data['phone'] ;
+
+
+        $user ->name =  $data['name'];
+        $user ->email =  $data['email'];
+        $user ->phone =  $data['phone'];
+        $user->save();
+
+        Session::flash('success','Profile updated' ) ;
 
         return redirect()->route('users.show',$user) ;
 
