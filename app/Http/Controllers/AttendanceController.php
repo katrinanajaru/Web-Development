@@ -6,6 +6,7 @@ use App\Models\attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -27,8 +28,14 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        $employees = User::where('role','employee')->latest()->get();
-        return view('admin.attendance.create',compact('employees')) ;
+        $attendance = attendance::where('employee_id',  Auth::user()->id)->where('active',true)->first();
+
+        if ($attendance) {
+            # code...
+            return redirect()->route('attendance.edit',$attendance) ;
+        }
+
+        return view('admin.attendance.create') ;
     }
 
     /**
@@ -44,7 +51,7 @@ class AttendanceController extends Controller
 
         attendance::create($data) ;
 
-        return redirect()->route('attendance.create')->with('success',"stored") ;
+        return redirect()->route('attendance.create')->with('success',"Your arrive time is saved") ;
 
 
 

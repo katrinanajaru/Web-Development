@@ -24,8 +24,7 @@ class StoreattendanceRequest extends FormRequest
     public function rules()
     {
         return [
-            'arrived_time'=>"nullable",
-            'timeout'=>"nullable",
+            'arrived_time'=>"required",
             'employee_id'=>"nullable"
         ];
     }
