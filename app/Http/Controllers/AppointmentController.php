@@ -9,6 +9,7 @@ use App\Models\Subservice;
 use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -127,6 +128,12 @@ class AppointmentController extends Controller
         ]);
         $appointment->status = "completed";
         $appointment->save();
+        $current_wallet = Wallet::latest()->first();
+        $balance = $current_wallet->balance +  $subservice->price ;
+        Wallet::create([
+            'balance' => $balance ,
+            'moneyin'=>$subservice->price
+        ]) ;
         return back()->with('success', $response['CustomerMessage']);
     }
 
