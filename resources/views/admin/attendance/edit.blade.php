@@ -32,8 +32,9 @@
                         <form action="{{route('attendance.update',$attendance)}}" class="col-md-6 offset-3 justify-center align-items-center" method="post">
                             <input type="hidden" name="employee_id" value="{{auth()->user()->id}}">
                             @csrf
+                            @method("PUT")
                             <div class="form-group">
-                                <label for="leave_time">Select your arrive time</label>
+                                <label for="leave_time">Select your Leave time</label>
                                 <input id="leave_time" class="form-control" type="time" name="leave_time">
                                 <button type="submit" class="btn btn-primary btn-block mt-2">Submit</button>
                             </div>

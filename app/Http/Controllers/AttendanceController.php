@@ -51,7 +51,7 @@ class AttendanceController extends Controller
 
         attendance::create($data) ;
 
-        return redirect()->route('attendance.create')->with('success',"Your arrive time is saved") ;
+        return redirect()->route('attendance.leave')->with('success',"Your arrive time is saved") ;
 
 
 
@@ -76,7 +76,8 @@ class AttendanceController extends Controller
      */
     public function edit(attendance $attendance)
     {
-        //
+        abort_if($attendance->employee_id != Auth::user()->id,403,"You cant view this") ;
+        return view('admin.attendance.edit',compact('attendance')) ;
     }
 
     /**
@@ -88,7 +89,9 @@ class AttendanceController extends Controller
      */
     public function update(UpdateattendanceRequest $request, attendance $attendance)
     {
-        //
+        $attendance->update($request->validated() ) ;
+        return redirect()->route('attendance.index')->with('success',"Your leave time is saved") ;
+
     }
 
     /**
@@ -99,6 +102,9 @@ class AttendanceController extends Controller
      */
     public function destroy(attendance $attendance)
     {
-        //
+        $attendance->delete() ;
+        return redirect()->route('attendance.index')->with('success',"Your leave attendance deleted") ;
+
+
     }
 }
