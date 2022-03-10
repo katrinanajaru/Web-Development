@@ -42,7 +42,8 @@
                                         <div class="post">
                                             <div class="user-block">
                                                 <img class="img-circle img-bordered-sm"
-                                                    src="{{ asset('/admin/dist/img/user1-128x128.jpg') }}" alt="user image">
+                                                    src="{{ asset('/admin/dist/img/user1-128x128.jpg') }}"
+                                                    alt="user image">
                                                 <span class="username">
                                                     <a href="#">{{ $appointment->user->name }}</a>
                                                 </span>
@@ -101,18 +102,49 @@
                                                                 <div class="div mr-4">
 
 
-                                                                    <a class="btn btn-sm  btn-primary" href="#" onclick="event.preventDefault();
-                                                            document.getElementById('pay-form').submit();">
-                                                                        {{ __('Pay') }}
-                                                                    </a>
+
 
                                                                     <form id="pay-form"
                                                                         action="{{ route('payAppointment', $appointment) }}"
-                                                                        method="POST" style="display: none;">
+                                                                        method="POST" >
                                                                         @csrf
+                                                                        <button type="submit" class="btn btn-sm  btn-info">  {{ __('Pay') }}</button>
                                                                     </form>
                                                                 </div>
                                                             @endif
+                                                            @if ($appointment->status != 'completed')
+
+                                                            <div class="div mr-4">
+
+
+
+                                                                <form
+                                                                    action="{{ route('approveAppointment', $appointment) }}"
+                                                                    method="POST" >
+                                                                    <input type="hidden" name="status" value="approved">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-sm  btn-success" >Approve</button>
+                                                                </form>
+                                                            </div>
+
+                                                            <div class="div mr-4">
+
+
+
+                                                                <form
+                                                                    action="{{ route('approveAppointment', $appointment) }}"
+                                                                    method="POST">
+                                                                    <input type="hidden" name="status" value="rejected">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-sm btn-secondary">  {{ __('Reject') }}</button>
+                                                                </form>
+                                                            </div>
+
+                                                            @endif
+
+
+
+
 
                                                         </div>
 

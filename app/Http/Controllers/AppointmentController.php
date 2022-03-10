@@ -10,6 +10,7 @@ use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AppointmentController extends Controller
 {
@@ -127,5 +128,21 @@ class AppointmentController extends Controller
         $appointment->status = "completed";
         $appointment->save();
         return back()->with('success', $response['CustomerMessage']);
+    }
+
+    public function approveAppointment(Appointment $appointment)
+    {
+        $status = request('status') ;
+        // return $status ;
+        $appointment->status = $status ;
+
+        if ( $appointment->save()) {
+            # code...
+
+            Session::flash('success',"Appointment ". $status ) ;
+        }else{
+            Session::flash('error',"Error occured" ) ;
+        }
+        return back();
     }
 }
