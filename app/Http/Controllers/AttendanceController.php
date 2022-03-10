@@ -17,7 +17,15 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attendances = attendance::latest()->get();
+
+        if (Auth::user()->role ==  "manager") {
+            # code...
+            $attendances = attendance::latest()->get();
+        } else {
+            # code...
+            $attendances = attendance::where('employee_id',Auth::user()->id)-> latest()->get();
+        }
+
         return view('admin.attendance.attendance',compact('attendances')) ;
     }
 

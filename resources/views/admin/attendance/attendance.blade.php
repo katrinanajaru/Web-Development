@@ -8,12 +8,12 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Employees Attendance List</h1>
+                  <h1>Employee Attendance List</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active">Employees Attendance</li>
+                    <li class="breadcrumb-item active">Employee Attendance</li>
                   </ol>
                 </div>
               </div>
@@ -41,6 +41,20 @@
                                     <td> {{ $attendance->leave_time }} </td>
                                     <td>
                                         <a href="#" class="btn btn-primary" > <i class="fa fa-eye" aria-hidden="true"></i> </a>
+                                        @if (Auth()->user()->role == "manager")
+
+                                            <a href="#" class="btn btn-danger"  onclick="event.preventDefault();
+                                        document.getElementById('delete_attendance').submit();" > <i class="fa fa-trash" aria-hidden="true"></i> </a>
+
+                                        <form action=" {{route('attendance.destroy',$attendance)}} " id="delete_attendance" method="post">
+                                            @method("DELETE")
+                                            @csrf
+                                        </form>
+
+                                        @endif
+
+
+
                                     </td>
 
                                 </tr>
