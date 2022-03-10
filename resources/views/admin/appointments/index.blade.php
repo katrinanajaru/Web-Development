@@ -80,6 +80,7 @@
                                             <th>User</th>
                                             <th>Name</th>
                                             <th>Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -90,6 +91,23 @@
                                             <td>{{$appointment->user->name}}</td>
                                             <td>{{$appointment->subservice->name}}</td>
                                             <td>{{$appointment->date}}</td>
+                                            <td>
+                                                @if ($appointment->status =="pending")
+
+                                                <span class="badge badge-warning">pending</span>
+
+                                                @elseif($appointment->status =="approved")
+                                                <span class="badge badge-success">approved</span>
+
+                                                @elseif($appointment->status =="rejected")
+                                                <span class="badge badge-danger">rejected</span>
+
+                                                @else
+                                                <span class="badge badge-primary">completed</span>
+
+                                                @endif
+
+                                                </td>
                                             <td>
                                                 <div class="row">
                                                     <div class="div mr-4">
@@ -108,6 +126,7 @@
                                             <th>User</th>
                                             <th>Name</th>
                                             <th>Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

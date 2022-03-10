@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Service;
+use App\Models\Subservice;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $noofemployees = User::where('role','employee')->count();
+        $noofclients=User::where('role','client')->count();
+        $noofsubservices=Subservice::get()->count();
+        $noofservices=Service::get()->count();
         $services = Service::latest()->get();
-        return view('admin.home',compact('services'));
+        return view('admin.home',compact('services','noofemployees','noofclients','noofservices','noofsubservices'));
     }
 }
