@@ -13,7 +13,7 @@ class StoreBillingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreBillingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>"required|string",
+            'amount'=>"required|numeric",
+            'reason'=>"required|string",
+            'created_by'=>"required"
         ];
     }
 }

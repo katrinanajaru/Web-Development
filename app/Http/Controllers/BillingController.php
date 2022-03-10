@@ -27,7 +27,7 @@ class BillingController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.Billings.create') ;
     }
 
     /**
@@ -38,7 +38,8 @@ class BillingController extends Controller
      */
     public function store(StoreBillingRequest $request)
     {
-        //
+        Billing::create($request->validated()) ;
+         return redirect()->route('billings.index')->with('success',"Billing created");
     }
 
     /**

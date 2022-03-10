@@ -59,12 +59,7 @@
                                 <p>Make appointment</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Boxed</p>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
                 {{-- services --}}
@@ -201,6 +196,13 @@
                             <a href="{{route('billings.index')}}" class="nav-link">
                                 <i class="fa fa-money" aria-hidden="true"></i>
                                 <p>View </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('billings.create')}}" class="nav-link">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                <p>Create </p>
                             </a>
                         </li>
 
