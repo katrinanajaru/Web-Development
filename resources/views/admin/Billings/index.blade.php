@@ -40,7 +40,7 @@
                                                 <th>Amount</th>
                                                 <th>Created BY</th>
                                                 <th>Confirmed By</th>
-                                                <th>Reason</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -52,7 +52,7 @@
                                                     <td>{{ $billing->amount }}</td>
                                                     <td>{{ $billing->createdBy->name ?? "" }}</td>
                                                     <td>{{ $billing->confirmedBy->name ?? "Not Yet" }}</td>
-                                                    <td>{{ Str::of($billing->reason)->limit(55)  }}</td>
+                                                    <td>{{ Str::of($billing->status)->limit(55)->upper()  }}</td>
                                                     <td>
                                                         <div class="row">
 
@@ -84,12 +84,16 @@
                                                                                     @method("PUT")
                                                                                     <button type="submit" class="btn btn-primary">Approve</button>
                                                                                 </form>
+                                                                                @if ($billing->status != "rejected")
                                                                                 <form class="col-md-4" action="{{route('billings.update',$billing)}}" method="post">
                                                                                     <input type="hidden" name="status" value="rejected">
                                                                                     @csrf
                                                                                     @method("PUT")
                                                                                     <button type="submit" class="btn btn-secondary">Rejected</button>
                                                                                 </form>
+
+                                                                                @endif
+
                                                                                 <form class="col-md-4" action="{{route('billings.destroy',$billing)}}" method="post">
                                                                                     <input type="hidden" name="status" value="rejected">
                                                                                     @csrf
@@ -116,7 +120,7 @@
                                                 <th>Amount</th>
                                                 <th>Created BY</th>
                                                 <th>Confirmed By</th>
-                                                <th>Reason</th>
+                                                <th>status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
