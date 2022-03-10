@@ -101,7 +101,7 @@
                                         <td>{{ $appointment->date}} </td>
                                         <td>{{ $appointment->status}} </td>
 
-                                        <td>{{ $appointment->employee_assigned->name}} </td>
+                                        <td>{{ $appointment->employee_assigned->name ?? "N/A"}} </td>
                                         <td>
                                             <a href="{{route('appointments.show',$appointment)}}" class="btn btn-primary" > <i class="fa fa-eye" aria-hidden="true"></i> </a>
                                         </td>

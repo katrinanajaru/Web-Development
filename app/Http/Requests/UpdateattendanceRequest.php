@@ -13,7 +13,7 @@ class UpdateattendanceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateattendanceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'leave_time'=>"required"
         ];
     }
 }

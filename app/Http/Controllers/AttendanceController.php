@@ -6,6 +6,7 @@ use App\Models\attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -16,7 +17,15 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attendances = attendance::latest()->get();
+
+        if (Auth::user()->role ==  "manager") {
+            # code...
+            $attendances = attendance::latest()->get();
+        } else {
+            # code...
+            $attendances = attendance::where('employee_id',Auth::user()->id)-> latest()->get();
+        }
+
         return view('admin.attendance.attendance',compact('attendances')) ;
     }
 
@@ -27,8 +36,14 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        $employees = User::where('role','employee')->latest()->get();
-        return view('admin.attendance.create',compact('employees')) ;
+        $attendance = attendance::where('employee_id',  Auth::user()->id)->where('active',true)->first();
+
+        if ($attendance) {
+            # code...
+            return redirect()->route('attendance.edit',$attendance) ;
+        }
+
+        return view('admin.attendance.create') ;
     }
 
     /**
@@ -44,7 +59,7 @@ class AttendanceController extends Controller
 
         attendance::create($data) ;
 
-        return redirect()->route('attendance.create')->with('success',"stored") ;
+        return redirect()->route('attendance.leave')->with('success',"Your arrive time is saved") ;
 
 
 
@@ -69,7 +84,8 @@ class AttendanceController extends Controller
      */
     public function edit(attendance $attendance)
     {
-        //
+        abort_if($attendance->employee_id != Auth::user()->id,403,"You cant view this") ;
+        return view('admin.attendance.edit',compact('attendance')) ;
     }
 
     /**
@@ -81,7 +97,9 @@ class AttendanceController extends Controller
      */
     public function update(UpdateattendanceRequest $request, attendance $attendance)
     {
-        //
+        $attendance->update($request->validated() ) ;
+        return redirect()->route('attendance.index')->with('success',"Your leave time is saved") ;
+
     }
 
     /**
@@ -92,6 +110,9 @@ class AttendanceController extends Controller
      */
     public function destroy(attendance $attendance)
     {
-        //
+        $attendance->delete() ;
+        return redirect()->route('attendance.index')->with('success',"Your leave attendance deleted") ;
+
+
     }
 }

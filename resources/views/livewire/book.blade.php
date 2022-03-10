@@ -32,10 +32,10 @@
             @foreach ($subservices as $subservice)
             <div class="col-md-3">
                 <div class="form-group">
-                    <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}}" alt="">
+                    <img src="/storage/subservices/{{$subservice->image}}" alt="{{$subservice->name}}">
                     <div class="form-check">
                         <input wire:model="subservice" class="form-check-input" value="{{$subservice->id}}" name="subservice_id" type="radio">
-                        <label class="form-check-label" >Select </label>
+                        <label class="form-check-label" >{{$subservice->name}} </label>
                     </div>
                 </div>
             </div>
