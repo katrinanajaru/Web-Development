@@ -26,13 +26,13 @@
                 {{-- data --}}
                 <!-- /.card -->
 
-                <div class="card">
+                <div class="card col-md-12">
                     <div class="card-header">
                         <h3 class="card-title">Services Offered</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                    <div class="card-body col-md-12">
+                        <table id="example1" class="table table-bordered table-striped col-md-12">
                             <thead>
                                 <tr>
                                     <th>Name</th>
