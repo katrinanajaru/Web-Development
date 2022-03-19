@@ -31,9 +31,58 @@ class UserController extends Controller
 
     }
 
+    public function create(){
+        return view("users.create") ;
+    }
+
     public function show(User $user)
     {
         return  view("users.show",compact('user'));
+    }
+
+    public function store( Request $request)
+    {
+        # code...
+        $data = $request->validate([
+            'name'=>["required",'string'] ,
+            'role'=>["required",'string'] ,
+            'email' => ['required', 'email', 'max:255',  'unique:users,email,except,id'],
+            'phone' => ['required', 'max:255',  'unique:users,phone,except,id'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+
+        ]) ;
+        $user = new User();
+
+        if (file_exists($request->file('image'))) {
+            // dd($request);
+             // Get filename with extension
+             $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+
+
+             // Get extension
+             $extension = $request->file('image')->getClientOriginalExtension();
+
+             // Create new filename
+             $filenameToStore = (string) Str::uuid() . '_' . time() . '.' . $extension;
+
+             // Uplaod image
+
+             $path = $request->file('image')->storeAs('public/profile', $filenameToStore);
+             $avatar  = $filenameToStore;
+             $user->image = $avatar ;
+            }
+
+            $user ->name =  $data['name'];
+            $user ->role =  $data['role'];
+        $user ->email =  $data['email'];
+        $user ->phone =  $data['phone'];
+        $user->password = Hash::make("password") ;
+        $user->save();
+        return redirect()->route('users.index')->with('success',"user created") ;
+
+
+
     }
 
 

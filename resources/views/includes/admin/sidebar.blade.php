@@ -152,7 +152,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('users.create') }}" class="nav-link">
                                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                                 <p>Add User</p>
                             </a>
