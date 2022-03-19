@@ -60,7 +60,7 @@ class AppointmentController extends Controller
     {
         $post = $request->validated();
         $route = "";
-        if(User::where('role', 'employee')->count() > 1){
+        if(User::where('role', 'employee')->count() >= 1){
             $post['employee_id'] = User::where('role', 'employee')->get()->random();
 
             Appointment::create($post);
