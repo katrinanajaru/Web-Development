@@ -29,6 +29,9 @@
                   {{Auth::user()->name}}
                   <span class="float-right text-sm text-success"><i >online</i></span>
                 </h3>
+                <div class="text text-primary" >
+                    {{auth()->user()->role}}
+                </div>
 
                 <div>
                     <a href="{{route('users.show',Auth::User()->id)}}" class="text-sm mt-4 btn btn-sm" >View Profile</a>

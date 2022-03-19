@@ -108,7 +108,7 @@
                                                         </form>
                                                     </div>
                                                     @endif
-                                                    @if ($appointment->status != 'completed')
+                                                    @if ($appointment->status != 'completed' && auth()->user()->isManager())
 
                                                     <div class="div mr-4">
                                                         <form action="{{ route('approveAppointment', $appointment) }}"
