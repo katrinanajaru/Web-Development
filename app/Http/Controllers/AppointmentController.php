@@ -139,7 +139,12 @@ class AppointmentController extends Controller
         $appointment->status = "completed";
         $appointment->save();
         $current_wallet = Wallet::latest()->first();
-        $balance = $current_wallet->balance +  $subservice->price ;
+        if( $current_wallet){
+            $balance = $current_wallet->balance +  $subservice->price ;
+        }else{
+            $balance = 0 ;
+        }
+
         Wallet::create([
             'balance' => $balance ,
             'moneyin'=>$subservice->price

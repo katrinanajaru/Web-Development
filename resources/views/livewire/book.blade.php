@@ -34,8 +34,8 @@
                 <div class="form-group">
                     <img src="/storage/subservices/{{$subservice->image}}" alt="{{$subservice->name}}">
                     <div class="form-check">
-                        <input wire:model="subservice" class="form-check-input" value="{{$subservice->id}}" name="subservice_id" type="radio">
-                        <label class="form-check-label" >{{$subservice->name}} </label>
+                        <input wire:model="subservice" style="width: 30px;  height: 30px; padding ;" class="form-check-input" value="{{$subservice->id}}" name="subservice_id" type="radio">
+                        <label class="form-check-label h3" style="padding-left:10px;" >{{$subservice->name}} <span class="text text-primary" >  {{ number_format($subservice->price ) }} Ksh</span>  </label>
                     </div>
                 </div>
             </div>
