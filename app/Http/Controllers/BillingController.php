@@ -16,7 +16,9 @@ class BillingController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny',Billing::class);
         $billings = Billing::all();
+
         return view('admin.Billings.index',compact('billings')) ;
     }
 
@@ -38,6 +40,7 @@ class BillingController extends Controller
      */
     public function store(StoreBillingRequest $request)
     {
+
         Billing::create($request->validated()) ;
          return redirect()->route('billings.index')->with('success',"Billing created");
     }

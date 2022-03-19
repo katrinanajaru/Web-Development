@@ -78,15 +78,24 @@
                                 <p>View Services</p>
                             </a>
                         </li>
+                        @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
                         <li class="nav-item">
                             <a href="{{route('services.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Services</p>
                             </a>
                         </li>
+
+                        @endif
+
+
                     </ul>
                 </li>
                 {{-- end of services --}}
+
+                @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
+
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
@@ -111,6 +120,12 @@
                         </li>
                     </ul>
                 </li>
+
+                @endif
+
+
+
+                @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
@@ -135,6 +150,12 @@
                         </li>
                     </ul>
                 </li>
+
+                @endif
+
+
+                @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
 
@@ -161,6 +182,11 @@
                     </ul>
                 </li>
 
+                @endif
+
+
+
+                @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
                 <li class="nav-item">
                     <a href="#" class="nav-link">
 
@@ -182,6 +208,11 @@
                     </ul>
                 </li>
 
+                @endif
+
+
+
+                @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
                 <li class="nav-item">
                     <a href="#" class="nav-link">
 
@@ -209,6 +240,12 @@
 
                     </ul>
                 </li>
+
+
+                @endif
+
+
+
 
 
 

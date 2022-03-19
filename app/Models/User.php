@@ -78,4 +78,31 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class, 'employee_id', 'id');
     }
+    public function isManager()
+    {
+        # code...
+        if ( $this->role == "MANAGER" ) {
+            # code...
+            return true ;
+        }
+        return false ;
+    }
+    public function isEmployee()
+    {
+        # code...
+        if ( $this->role == "EMPLOYEE" ) {
+            # code...
+            return true ;
+        }
+        return false ;
+    }
+    public function isClient()
+    {
+        # code...
+        if ( $this->role == "CLIENT" ) {
+            # code...
+            return true ;
+        }
+        return false ;
+    }
 }
