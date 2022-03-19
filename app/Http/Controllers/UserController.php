@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use Illuminate\Validation\Rule;
 
@@ -72,6 +72,29 @@ class UserController extends Controller
 
 
         // return $data['phone'] ;
+
+
+        if (file_exists($request->file('image'))) {
+            // dd($request);
+             // Get filename with extension
+             $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+
+
+             // Get extension
+             $extension = $request->file('image')->getClientOriginalExtension();
+
+             // Create new filename
+             $filenameToStore = (string) Str::uuid() . '_' . time() . '.' . $extension;
+
+             // Uplaod image
+
+             $path = $request->file('image')->storeAs('public/profile', $filenameToStore);
+             $avatar  = $filenameToStore;
+             $user->image = $avatar ;
+            }
+
+
 
 
         $user ->name =  $data['name'];

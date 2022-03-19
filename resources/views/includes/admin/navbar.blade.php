@@ -15,14 +15,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
 
-          <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}} " height="35px" alt="User Avatar" class="img-circle">
+          {{-- <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}} " height="35px" alt="User Avatar" class="img-circle"> --}}
+          <img src="{{asset('/storage/profile/'. auth()->user()->image)}} " height="35px" alt="User Avatar" class="img-circle">
 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="{{asset('/storage/profile/'. auth()->user()->image)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body"> <br>
                 <h3 class="dropdown-item-title">
                   {{Auth::user()->name}}
