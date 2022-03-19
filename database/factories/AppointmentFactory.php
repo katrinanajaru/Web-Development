@@ -27,7 +27,7 @@ class AppointmentFactory extends Factory
             'user_id'=>function(){return User::all()->random();},
             'employee_id'=>function(){return User::where('role','employee')->get() ->random();},
             'status'=>$this->faker->randomElement(['pending','rejected','approved','completed']),
-            'description'=>$this->faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+            'description'=>$this->faker->realText(150),
 
 
         ];

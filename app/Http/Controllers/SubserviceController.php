@@ -32,7 +32,8 @@ class SubserviceController extends Controller
      */
     public function create()
     {
-        $services = Subservice::latest()->get();
+        $services = Service::latest()->get();
+        // return $services ;
         return view('admin.subservices.create',compact('services'));
     }
 

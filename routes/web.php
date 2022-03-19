@@ -17,7 +17,7 @@ use App\Http\Controllers\AppointmentController;
 */
 include_once "myroutes.php"  ;
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("login") ;
 });
 
 Auth::routes();
