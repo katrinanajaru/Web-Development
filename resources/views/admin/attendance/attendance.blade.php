@@ -36,7 +36,7 @@
                             <tbody>
                                 @foreach ($attendances as $attendance)
                                 <tr>
-                                    <td scope="row"> {{ $attendance->employee->name}} </td>
+                                    <td > {{ $attendance->employee->name}} </td>
                                     <td> {{ $attendance->arrived_time }} </td>
                                     <td> {{ $attendance->leave_time }} </td>
                                     <td>

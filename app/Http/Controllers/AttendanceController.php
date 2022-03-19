@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\attendance;
+use App\Models\Attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
 use App\Models\User;
@@ -18,14 +18,13 @@ class AttendanceController extends Controller
     public function index()
     {
 
-        if (Auth::user()->role ==  "manager") {
+        if (Auth::user()->role ="manager") {
             # code...
-            $attendances = attendance::latest()->get();
+            $attendances = Attendance::latest()->get();
         } else {
             # code...
-            $attendances = attendance::where('employee_id',Auth::user()->id)-> latest()->get();
+            $attendances = Attendance::where('employee_id',Auth::user()->id)->latest()->get();
         }
-
         return view('admin.attendance.attendance',compact('attendances')) ;
     }
 
