@@ -59,11 +59,21 @@ class AppointmentController extends Controller
     public function store(StoreAppointmentRequest $request)
     {
         $post = $request->validated();
-        $post['employee_id'] = User::where('role', 'employee')->get()->random();
+        $route = "";
+        if(User::where('role', 'employee')->count() > 1){
+            $post['employee_id'] = User::where('role', 'employee')->get()->random();
 
-        Appointment::create($post);
+            Appointment::create($post);
+            Session::flash('success', 'You have successfully booked your selected service') ;
+            $route = 'appointments.index' ;
 
-        return redirect()->route('appointments.index')->with('success', 'You have successfully booked your selected service');
+        }else{
+            Session::flash("error","Please wait for admin to add new employees for this service") ;
+            $route = 'appointments.index' ;
+        }
+
+
+        return redirect()->route($route);
     }
 
     /**
