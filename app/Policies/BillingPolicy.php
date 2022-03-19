@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Models\Billing;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
+use Illuminate\Support\Str;
 class BillingPolicy
 {
     use HandlesAuthorization;
@@ -18,7 +18,17 @@ class BillingPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if (auth()->user()->isEmployee() || auth()->user()->isManager() ) {
+            # code...
+            return true ;
+        }
+        return false ;
+
+
+
+
+
+
     }
 
     /**

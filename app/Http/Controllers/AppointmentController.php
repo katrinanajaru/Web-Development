@@ -24,7 +24,8 @@ class AppointmentController extends Controller
     {
 
 
-        if (auth()->user()->role == "manager") {
+
+        if (auth()->user()->isEmployee() ||auth()->user()->isManager()) {
             # code...
             $appointments = Appointment::latest()->paginate(3);
             $appointmenttabless = Appointment::latest()->get();
@@ -61,8 +62,7 @@ class AppointmentController extends Controller
         $post = $request->validated();
         $route = "";
         if(User::where('role', 'employee')->count() >= 1){
-            $post['employee_id'] = User::where('role', 'employee')->get()->random();
-
+            $post['employee_id'] = User::where('role', 'employee')->get()->random()->pluck('id')[0] ;
             Appointment::create($post);
             Session::flash('success', 'You have successfully booked your selected service') ;
             $route = 'appointments.index' ;

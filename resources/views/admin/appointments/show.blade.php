@@ -54,7 +54,7 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">Employee Assigned:</th>
-                        <td>{{$appointment->employee_assigned->name}}</td>
+                        <td>{{$appointment->employee_assigned->name ?? ""}}</td>
                       </tr>
                       <tr>
                         <th>Sub-service Selected:</th>
@@ -69,6 +69,8 @@
 
                             @elseif($appointment->status =="approved")
                             <span class="badge badge-primary"> Approved</span>
+                            @elseif($appointment->status =="completed")
+                            <span class="badge badge-success"> Approved</span>
 
                             @elseif ($appointment->status =="rejected")
                             <span class="badge badge-danger"> Rejected</span>
@@ -102,7 +104,7 @@
                             </form>
                         </div>
                         @endif
-                        @if ($appointment->status != 'completed')
+                        @if ($appointment->status != 'completed' && auth()->user()->isManager())
 
                         <div class="div mr-4">
                             <form action="{{ route('approveAppointment', $appointment) }}"
