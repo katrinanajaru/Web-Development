@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Invoice</h1>
+            <h1>Appointment</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Invoice</li>
+              <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+              <li class="breadcrumb-item active">Appointment</li>
             </ol>
           </div>
         </div>
@@ -31,7 +31,6 @@
                 <div class="col-12">
                   <h4>
                     <i class="fas fa-globe"></i>Barber shop
-                    <small class="float-right">{{date('Y')}}</small>
                   </h4>
                 </div>
                 <!-- /.col -->
@@ -41,63 +40,94 @@
               <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-6">
-                  <p class="lead">Payment Methods:</p>
+                  <p class="lead">Service Name: {{$appointment->subservice->name}}</p>
+
+                  <label for="">Description</label>
 
                   <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                    {{$appointment->description}}
                   </p>
                 </div>
                 <!-- /.col -->
                 <div class="col-6">
-                  <p class="lead">Amount Due 2/22/2014</p>
-
                   <div class="table-responsive">
                     <table class="table">
                       <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
+                        <th style="width:50%">Employee Assigned:</th>
+                        <td>{{$appointment->employee_assigned->name}}</td>
                       </tr>
                       <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
+                        <th>Sub-service Selected:</th>
+                        <td>{{$appointment->subservice->name}}</td>
                       </tr>
                       <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
+                        <th>Status:</th>
+                        <td>
+                            @if ($appointment->status =="pending")
+
+                            <span class="badge badge-warning"> Pending</span>
+
+                            @elseif($appointment->status =="approved")
+                            <span class="badge badge-primary"> Approved</span>
+
+                            @elseif ($appointment->status =="rejected")
+                            <span class="badge badge-danger"> Rejected</span>
+
+
+                            @endif
+
+                        </td>
                       </tr>
                       <tr>
-                        <th>Total:</th>
-                        <td>$265.24</td>
+                        <th>Sub-service price:</th>
+                        <td>Ksh: {{$appointment->subservice->price}}</td>
                       </tr>
                     </table>
                   </div>
                 </div>
                 <!-- /.col -->
               </div>
-              <!-- /.row -->
-
-              <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
 
-                    <form action="{{route('appointments.destroy',$appointment->id)}}" method="DELETE" enctype="multipart/form-data">
-                        @csrf
-                        @method('DELETE')
+                    <div class="row">
+                        @if ($appointment->status != 'completed')
+                        <div class="div mr-4">
+                            <form id="pay-form"
+                                action="{{ route('payAppointment', $appointment) }}"
+                                method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm  btn-warning"> {{
+                                    __('Pay') }}</button>
+                            </form>
+                        </div>
+                        @endif
+                        @if ($appointment->status != 'completed')
 
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</button>
-                    </form>
-                    <img src="{{asset('/admin/dist/img/credit/visa.png')}}" alt="Visa">
-                    <img src="{{asset('/admin/dist/img/credit/mastercard.png')}}" alt="Mastercard">
-                    <img src="{{asset('/admin/dist/img/credit/american-express.png')}}" alt="American Express">
-                    <img src="{{asset('/admin/dist/img/credit/paypal2.png')}}" alt="Paypal">
-                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                    Payment
-                  </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Generate PDF
-                  </button>
+                        <div class="div mr-4">
+                            <form action="{{ route('approveAppointment', $appointment) }}"
+                                method="POST">
+                                <input type="hidden" name="status" value="approved">
+                                @csrf
+                                <button type="submit"
+                                    class="btn btn-sm  btn-success">Approve</button>
+                            </form>
+                        </div>
+                        <div class="div mr-4">
+                            <form action="{{ route('approveAppointment', $appointment) }}"
+                                method="POST">
+                                <input type="hidden" name="status" value="rejected">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-secondary"> {{
+                                    __('Reject') }}</button>
+                            </form>
+
+                        </div>
+                        @endif
+                    </div>
+                  <a type="button" href="{{route('appointments.index')}}" class="btn btn-primary float-right" style="margin-right: 5px;">
+                     Back
+                  </a>
                 </div>
               </div>
             </div>
