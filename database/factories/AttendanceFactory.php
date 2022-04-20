@@ -18,8 +18,8 @@ class AttendanceFactory extends Factory
     public function definition()
     {
         return [
-            'arrived_time'=>$this->faker->date(),
-            'leave_time'=>$this->faker->date(),
+            'arrived_time'=>$this->faker->time(),
+            'leave_time'=>$this->faker->time(),
             'employee_id'=>function(){return  User::where('role','employee')->get() ->random();}
 
         ];

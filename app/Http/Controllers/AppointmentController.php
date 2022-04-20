@@ -46,6 +46,10 @@ class AppointmentController extends Controller
      */
     public function create()
     {
+        if (! Auth::user()->isClient() ) {
+            Session::flash("error","Only client can create appointment") ;
+            return redirect()->route('appointments.index') ;
+        }
         $services = Service::all();
         $subservices  = Subservice::paginate(12);
         return view('admin.appointments.create', compact('services', 'subservices'));
@@ -59,6 +63,10 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
+        if ( ! Auth::user()->isClient() ) {
+            Session::flash("error","Only client can create appointment") ;
+            return redirect()->route('appointments.index') ;
+        }
         $post = $request->validated();
         $route = "";
         if(User::where('role', 'employee')->count() >= 1){
@@ -174,7 +182,7 @@ class AppointmentController extends Controller
 
             Session::flash('success',"Appointment ". $status ) ;
         }else{
-            Session::flash('error',"Error occured" ) ;
+            Session::flash('error',"Error occurred" ) ;
         }
         return back();
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 
@@ -27,6 +29,10 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        if ( Auth::user()->isClient() ) {
+            Session::flash("error","Only Admins can create Service") ;
+            return redirect()->route('services.index') ;
+        }
         return view('admin.services.create');
     }
 
@@ -38,6 +44,10 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
+        if ( Auth::user()->isClient() ) {
+            Session::flash("error","Only Admins can create Service") ;
+            return redirect()->route('services.index') ;
+        }
         $post=$request->validated();
 
         Service::create($post);
@@ -64,6 +74,10 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+        if ( Auth::user()->isClient() ) {
+            Session::flash("error","Only Admins can Edit Service") ;
+            return redirect()->route('services.index') ;
+        }
         return view('admin.services.edit',compact('service'));
     }
 
@@ -98,6 +112,10 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        if (  Auth::user()->isClient() ) {
+            Session::flash("error","Only Admins can delete Service") ;
+            return redirect()->route('services.index') ;
+        }
         $service->delete();
 
         if($service){

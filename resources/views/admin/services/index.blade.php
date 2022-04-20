@@ -51,9 +51,12 @@
                                             <div class="mr-4">
                                                 <a href="{{route('services.show',$service->id)}}" class="btn btn-sm btn-info">view</a>
                                             </div>
+                                            @if ( ! Auth::user()->isClient() )
                                             <div class="div">
                                                 <a href="{{route('services.edit',$service->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                             </div>
+                                            @endif
+
                                         </div>
 
                                     </td>

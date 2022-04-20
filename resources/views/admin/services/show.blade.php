@@ -29,11 +29,19 @@
                         <hr class="my-4">
                         <p>{{$service->description}}</p>
                     </div>
+                    @if ( ! Auth::user()->isClient() )
                     <form action="{{route('services.destroy',$service->id)}}" method="post" >
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?;')">Delete</button>
                     </form>
+
+                    <a  class="btn btn-secondary" href="{{ route('services.edit',$service) }}">Edit</a>
+
+
+                    @endif
+
+
                 </div>
             </div>
         </div>

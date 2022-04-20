@@ -23,48 +23,71 @@
           <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-md-12">
-                    <table id="example1" class="table table-hover table-inverse ">
-                        <thead class="thead-inverse">
-                            <tr>
-                                <th>Employee</th>
-                                <th>Time In</th>
-                                <th>Time out </th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($attendances as $attendance)
-                                <tr>
-                                    <td > {{ $attendance->employee->name}} </td>
-                                    <td> {{ $attendance->arrived_time }} </td>
-                                    <td> {{ $attendance->leave_time }} </td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary" > <i class="fa fa-eye" aria-hidden="true"></i> </a>
-                                        @if (Auth()->user()->role == "manager")
+                    <div class="card col-12">
+                        <div class="card-body ">
 
-                                            <a href="#" class="btn btn-danger"  onclick="event.preventDefault();
-                                        document.getElementById('delete_attendance').submit();" > <i class="fa fa-trash" aria-hidden="true"></i> </a>
-
-                                        <form action=" {{route('attendance.destroy',$attendance)}} " id="delete_attendance" method="post">
-                                            @method("DELETE")
-                                            @csrf
-                                        </form>
-
+                            <table class="table table-hover table-inverse ">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Time In</th>
+                                        <th>Time out </th>
+                                        @if (Auth()->user()->isManager())
+                                            <th>Action</th>
                                         @endif
 
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($attendances as $attendance)
+
+                                        <tr>
+                                            <td > {{ $attendance->employee->name}} </td>
+                                            <td> {{ $attendance->arrived_time ." => ". $attendance->created_at  }} </td>
+                                            <td>
+                                                @if ($attendance->leave_time == "")
+                                                <span class="badge badge-pill badge-warning">Sign Out</span>
+
+                                                @else
+                                                    {{  $attendance->leave_time  ." => ". $attendance->updated_at }}
+                                                @endif
+                                                 </td>
 
 
-                                    </td>
+                                                @if (Auth()->user()->isManager())
+                                                <td>
 
-                                </tr>
+                                                    <a href="#" class="btn btn-danger"  onclick="event.preventDefault();
+                                                document.getElementById('delete_attendance').submit();" > <i class="fa fa-trash" aria-hidden="true"></i> </a>
 
-                                @endforeach
+                                                <form action=" {{route('attendance.destroy',$attendance)}} " id="delete_attendance" method="post">
+                                                    @method("DELETE")
+                                                    @csrf
+                                                </form>
+                                            </td>
+
+                                                @endif
 
 
-                            </tbody>
-                    </table>
-                </div>
+
+
+
+                                        </tr>
+
+                                        @endforeach
+
+
+
+                                    </tbody>
+
+
+                            </table>
+                            {{ $attendances->links()  }}
+
+
+                        </div>
+                    </div>
+
             </div>
             <!-- /.row -->
             <!-- Main row -->

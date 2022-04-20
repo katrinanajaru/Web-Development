@@ -20,10 +20,10 @@ class AttendanceController extends Controller
 
         if (Auth::user()->role ="manager") {
             # code...
-            $attendances = Attendance::latest()->get();
+            $attendances = Attendance::latest()->simplePaginate(15);
         } else {
             # code...
-            $attendances = Attendance::where('employee_id',Auth::user()->id)->latest()->get();
+            $attendances = Attendance::where('employee_id',Auth::user()->id)->latest()->simplePaginate(15);
         }
         return view('admin.attendance.attendance',compact('attendances')) ;
     }
@@ -58,7 +58,7 @@ class AttendanceController extends Controller
 
         attendance::create($data) ;
 
-        return redirect()->route('attendance.leave')->with('success',"Your arrive time is saved") ;
+        return redirect()->route('attendance.index')->with('success',"Your arrive time is saved") ;
 
 
 
