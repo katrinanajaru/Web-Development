@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\MpesaGateway;
+use App\Http\Payments\Money;
+use App\Http\Payments\MpesaGateway;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Subservice;
@@ -121,34 +121,45 @@ class AppointmentController extends Controller
         //
     }
 
-    public function payAppointment(Appointment $appointment, MpesaGateway $mpesa)
+    public function payAppointment(Appointment $appointment)
     {
         # stk push for payment
+        $mpesa = new Money();
 
         $subservice = $appointment->subservice;
-        $response = $mpesa->lipaNaMPesaOnlineAPI(Auth::user()->phone, $subservice->price);
-        $makepay = $subservice->payments()->create([
-            'user_id' => auth()->user()->id,
-            'MerchantRequestID' => $response['MerchantRequestID'],
-            'CheckoutRequestID' => $response['CheckoutRequestID'],
-            'ResponseCode' => $response['ResponseCode'],
-            'ResponseDescription' => $response['ResponseDescription'],
-            'CustomerMessage' => $response['CustomerMessage'],
-            'amount' => $subservice->price
-        ]);
-        $appointment->status = "completed";
-        $appointment->save();
-        $current_wallet = Wallet::latest()->first();
-        if( $current_wallet){
-            $balance = $current_wallet->balance +  $subservice->price ;
-        }else{
-            $balance = 0 ;
+
+        try {
+            $response = $mpesa->lipaNaMPesaOnlineAPI(Auth::user()->phone, $subservice->price);
+            $makepay = $subservice->payments()->create([
+                'user_id' => auth()->user()->id,
+                'MerchantRequestID' => $response['MerchantRequestID'],
+                'CheckoutRequestID' => $response['CheckoutRequestID'],
+                'ResponseCode' => $response['ResponseCode'],
+                'ResponseDescription' => $response['ResponseDescription'],
+                'CustomerMessage' => $response['CustomerMessage'],
+                'amount' => $subservice->price
+            ]);
+            $appointment->status = "completed";
+            $appointment->save();
+
+            $current_wallet = Wallet::latest()->first();
+            if( $current_wallet){
+                $balance = $current_wallet->balance +  $subservice->price ;
+            }else{
+                $balance = 0 ;
+            }
+
+            Wallet::create([
+                'balance' => $balance ,
+                'moneyin'=>$subservice->price
+            ]) ;
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return back()->with('error', "Please Check Your number format in your profile!");
         }
 
-        Wallet::create([
-            'balance' => $balance ,
-            'moneyin'=>$subservice->price
-        ]) ;
+
         return back()->with('success', $response['CustomerMessage']);
     }
 

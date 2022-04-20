@@ -78,6 +78,7 @@
                                             <th>User</th>
                                             <th>Name</th>
                                             <th>Date</th>
+                                            <th>Amount</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -89,6 +90,7 @@
                                             <td>{{ $appointment->user->name }}</td>
                                             <td>{{ $appointment->subservice->name }}</td>
                                             <td>{{ $appointment->date }}</td>
+                                            <td>{{ number_format( $appointment->subservice->price, 2 )}}  </td>
                                             <td>{{ $appointment->status }}</td>
                                             <td>
                                                 <div class="row">

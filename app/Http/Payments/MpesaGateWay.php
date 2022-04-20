@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http;
-
-use GuzzleHttp\Client;
+namespace App\Http\Payments;
+// use GuzzleHttp\Client;
 class MpesaGateway
 {
 
@@ -19,6 +18,8 @@ class MpesaGateway
 
     public function get_access_token()
     {
+        return "here";
+
         $Consumer_Key = "NFvAmAESuF667Bvleo2o71wbKluPnkfX";
         $Consumer_Secret = "gY4Lg6osipYRIgwA";
         $key_sec = $Consumer_Key . ":" . $Consumer_Secret;
