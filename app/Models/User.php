@@ -105,4 +105,12 @@ class User extends Authenticatable
         }
         return false ;
     }
+    public function getImageAttribute($value){
+        if ( $value =="" || $value == null) {
+            return asset("avatar.png");
+        } else {
+            return asset('storage/profile/'. $value)  ;
+        }
+
+    }
 }

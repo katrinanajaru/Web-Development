@@ -116,13 +116,14 @@ class ServiceController extends Controller
             Session::flash("error","Only Admins can delete Service") ;
             return redirect()->route('services.index') ;
         }
-        $service->delete();
 
-        if($service){
+
+        if($service->delete()){
+
             return redirect()->route('services.index')->with('success','You have successfully deleted the record');
         }
         else{
-            return back()->with('error','An error occured, please try again or contact the manager!');
+            return back()->with('error','An error occurred, please try again or contact the manager!');
         }
     }
 }
