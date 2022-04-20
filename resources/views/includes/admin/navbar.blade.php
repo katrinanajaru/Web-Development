@@ -30,10 +30,10 @@
                   <span class="float-right text-sm text-success"><i >online</i></span>
                 </h3>
                 <div class="text text-primary" >
-                    @if (Str::lower( $user->role )  == "client")
+                    @if (Str::lower( Auth::user()->role )  == "client")
                                         USER
                                     @else
-                                    {{ $user->role }}
+                                    {{ Auth::user()->role }}
                                     @endif
                 </div>
 

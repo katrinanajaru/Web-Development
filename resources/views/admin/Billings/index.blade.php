@@ -54,6 +54,8 @@
                                                     <td>{{ $billing->confirmedBy->name ?? "Not Yet" }}</td>
                                                     <td>{{ Str::of($billing->status)->limit(55)->upper()  }}</td>
                                                     <td>
+                                                        @if (Auth::user()->isManager())
+
                                                         <div class="row">
 
 
@@ -78,12 +80,8 @@
                                                                                 {{ $billing->reason }}
                                                                             </p>
                                                                             <div class="row" >
-                                                                                <form class="col-md-4" action="{{route('billings.update',$billing)}}" method="post">
-                                                                                    <input type="hidden" name="status" value="approved">
-                                                                                    @csrf
-                                                                                    @method("PUT")
-                                                                                    <button type="submit" class="btn btn-primary">Approve</button>
-                                                                                </form>
+
+
                                                                                 @if ($billing->status != "rejected" || $billing->status != "approved")
                                                                                 <form class="col-md-4" action="{{route('billings.update',$billing)}}" method="post">
                                                                                     <input type="hidden" name="status" value="rejected">
@@ -108,6 +106,9 @@
                                                             </div>
 
                                                         </div>
+
+                                                        @endif
+
 
                                                     </td>
                                                 </tr>

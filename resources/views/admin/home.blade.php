@@ -118,7 +118,7 @@
                                             <div class="mr-2">
                                                 <a href="{{route('services.show',$service->id)}}" class="btn btn-sm btn-info">View</a>
                                             </div>
-                                            @if ( ! Auth::user()->isClient() )
+                                            @if (Auth::user()->isManager()  )
                                             <div>
                                                 <a href="{{route('services.edit',$service->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                             </div>

@@ -84,7 +84,7 @@
                                 <p>View Services</p>
                             </a>
                         </li>
-                        @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
+                        @if (! auth()->user()->isManager() )
                         <li class="nav-item">
                             <a href="{{route('services.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -99,9 +99,9 @@
                 </li>
                 {{-- end of services --}}
 
+
+
                 @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
-
-
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
@@ -117,6 +117,7 @@
                                 <p>View sub-services</p>
                             </a>
                         </li>
+                        @if (auth()->user()->isManager() )
 
                         <li class="nav-item">
                             <a href="{{route('subservices.create')}}" class="nav-link">
@@ -124,10 +125,13 @@
                                 <p>Add Sub-service</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
-
                 @endif
+
+
+
 
 
 
@@ -193,6 +197,7 @@
 
 
                 @if (auth()->user()->isEmployee() || auth()->user()->isManager() )
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
 

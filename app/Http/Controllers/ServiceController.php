@@ -29,7 +29,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        if ( Auth::user()->isClient() ) {
+        if ( ! Auth::user()->isManager()) {
             Session::flash("error","Only Admins can create Service") ;
             return redirect()->route('services.index') ;
         }
@@ -44,8 +44,8 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        if ( Auth::user()->isClient() ) {
-            Session::flash("error","Only Admins can create Service") ;
+        if ( ! Auth::user()->isManager()) {
+            Session::flash("error","Only Manager can create Service") ;
             return redirect()->route('services.index') ;
         }
         $post=$request->validated();
@@ -74,8 +74,8 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        if ( Auth::user()->isClient() ) {
-            Session::flash("error","Only Admins can Edit Service") ;
+        if ( ! Auth::user()->isManager()) {
+            Session::flash("error","Only Manager can Edit Service") ;
             return redirect()->route('services.index') ;
         }
         return view('admin.services.edit',compact('service'));
@@ -112,8 +112,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        if (  Auth::user()->isClient() ) {
-            Session::flash("error","Only Admins can delete Service") ;
+        if ( ! Auth::user()->isManager()) {
+            Session::flash("error","Only Manager can delete Service") ;
             return redirect()->route('services.index') ;
         }
 
