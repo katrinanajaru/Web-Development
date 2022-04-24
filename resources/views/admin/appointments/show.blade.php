@@ -40,7 +40,7 @@
               <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-6">
-                  <p class="lead">Service Name: {{$appointment->subservice->name}}</p>
+                  <p class="lead">Service Name: {{$appointment->subservice->name ?? ""}}</p>
 
                   <label for="">Description</label>
 
@@ -58,7 +58,7 @@
                       </tr>
                       <tr>
                         <th>Sub-service Selected:</th>
-                        <td>{{$appointment->subservice->name}}</td>
+                        <td>{{$appointment->subservice->name ?? ""}}</td>
                       </tr>
                       <tr>
                         <th>Status:</th>
@@ -82,7 +82,7 @@
                       </tr>
                       <tr>
                         <th>Sub-service price:</th>
-                        <td>Ksh: {{$appointment->subservice->price}}</td>
+                        <td>Ksh: {{$appointment->subservice->price ?? ""}}</td>
                       </tr>
                     </table>
                   </div>
