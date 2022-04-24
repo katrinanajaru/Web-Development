@@ -53,9 +53,9 @@
                                     @foreach ($appointmenttabless as $appointment)
                                         <tr>
                                             <td>{{ $appointment->user->name ?? '' }}</td>
-                                            <td>{{ $appointment->subservice->name }}</td>
+                                            <td>{{ $appointment->subservice->name ?? "" }}</td>
                                             <td>{{ $appointment->date }}</td>
-                                            <td>{{ number_format($appointment->subservice->price, 2) }} </td>
+                                            <td>{{ number_format($appointment->subservice->price ?? 0 , 2) }} </td>
                                             <td class="text text-bold h3" >
 
                                                 @switch($appointment->status)

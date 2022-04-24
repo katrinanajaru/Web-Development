@@ -93,7 +93,7 @@
                 <div class="col-12">
 
                     <div class="row">
-                        @if ($appointment->status != 'completed')
+                        @if ($appointment->status != 'completed' && Auth::user()->isClient())
                         <div class="div mr-4">
                             <form id="pay-form"
                                 action="{{ route('payAppointment', $appointment) }}"
