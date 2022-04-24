@@ -26,7 +26,7 @@
                 {{-- data --}}
                 <!-- /.card -->
 
-                <div class="card">
+                <div class="card col-md-12 ">
                     <div class="card-header">
                         <h3 class="card-title">Services Offered</h3>
                     </div>
