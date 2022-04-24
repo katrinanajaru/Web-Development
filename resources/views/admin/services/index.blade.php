@@ -48,12 +48,21 @@
                                     <td>{{Str::limit($service->description,100)}}</td>
                                     <td>
                                         <div class="row">
-                                            <div class="mr-4">
-                                                <a href="{{route('services.show',$service->id)}}" class="btn btn-sm btn-info">view</a>
+                                            <div class="col-md-4 ">
+                                                <a href="{{route('services.show',$service->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             </div>
                                             @if ( ! Auth::user()->isClient() )
-                                            <div class="div">
-                                                <a href="{{route('services.edit',$service->id)}}" class="btn btn-sm btn-warning">Edit</a>
+                                            <div class="col-md-4 ">
+                                                <a href="{{route('services.edit',$service->id)}}" class="btn btn-sm btn-warning"> Edit </a>
+                                            </div>
+                                            @endif
+                                            @if (  Auth::user()->isManager() )
+                                            <div class="col-md-4 " >
+                                                <form action="{{ route('services.destroy',$service->id) }}" onsubmit="return confirm('Are you sure you need to delete Service')" method="post">
+                                                    @method("DELETE")
+                                                    @csrf
+                                                    <button class="btn btn-danger" type="submit"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
+                                                </form>
                                             </div>
                                             @endif
 

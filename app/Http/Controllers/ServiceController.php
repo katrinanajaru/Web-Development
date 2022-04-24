@@ -117,6 +117,11 @@ class ServiceController extends Controller
             return redirect()->route('services.index') ;
         }
 
+        if ( $service->subServices->count()> 0 ) {
+
+            $service->subServices->each->delete();
+        }
+
 
         if($service->delete()){
 

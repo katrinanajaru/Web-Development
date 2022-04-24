@@ -89,12 +89,20 @@ class UserController extends Controller
 
 
 
-    public function delete(User $user)
+    public function destroy(User $user)
     {
         # code...
         if ( Storage::exists('storage/profile/'.$user->image) ) {
             # code...
             Storage::delete('storage/profile/'.$user->image);
+        }
+        if ($user->appointments->count() >0) {
+            $user->payments->each->delete();
+            $user->appointments->each->delete();
+        }
+        if ( $user->attedances->count() > 0 ) {
+            # code...
+            $user->attedances->each->delete();
         }
         $user->delete() ;
 

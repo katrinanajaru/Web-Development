@@ -19,5 +19,15 @@ class Service extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    
+
+     /**
+      * Get all of the subServices for the Service
+      *
+      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+      */
+     public function subServices()
+     {
+         return $this->hasMany(Subservice::class);
+     }
+
 }

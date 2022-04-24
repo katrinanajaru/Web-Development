@@ -53,12 +53,24 @@
                                     <td>{{Str::limit($subservice->description,80)}}</td>
                                     <td>
                                         <div class="row">
-                                            <div class="mr-4">
+                                            <div class="col-md-4">
                                                 <a href="{{route('subservices.show',$subservice->id)}}" class="btn btn-sm btn-info">view</a>
                                             </div>
-                                            <div class="div">
+
+
+                                            @if (  Auth::user()->isManager() )
+                                            <div class="col-md-4">
                                                 <a href="{{route('subservices.edit',$subservice->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                             </div>
+                                            <div class="col-md-4 " >
+                                                <form action="{{ route('subservices.destroy',$subservice->id) }}" onsubmit="return confirm('Are you sure you need to delete Subservice')" method="post">
+                                                    @method("DELETE")
+                                                    @csrf
+                                                    <button class="btn btn-danger" type="submit"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
+                                                </form>
+                                            </div>
+                                            @endif
+
                                         </div>
 
                                     </td>

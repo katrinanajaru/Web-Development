@@ -84,7 +84,7 @@
                                 <p>View Services</p>
                             </a>
                         </li>
-                        @if (! auth()->user()->isManager() )
+                        @if (auth()->user()->isManager() )
                         <li class="nav-item">
                             <a href="{{route('services.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>

@@ -35,7 +35,7 @@ class Subservice extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function appointments(): HasMany
+    public function appointments()
     {
         return $this->hasMany(Appointment::class, 'subservice_id', 'local_key');
     }
