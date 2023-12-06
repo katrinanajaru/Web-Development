@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Services</h1>
+                        <h1>Appointments</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -37,11 +37,14 @@
 
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped text-capitalize ">
                                 <thead>
                                     <tr>
+                                        @if (!Auth::user()->isClient())
                                         <th>User</th>
-                                        <th>Name</th>
+                                        @endif
+
+                                        <th>Service</th>
                                         <th>Date</th>
                                         <th>Amount</th>
                                         <th>Status</th>
@@ -52,7 +55,10 @@
 
                                     @foreach ($appointmenttabless as $appointment)
                                         <tr>
+                                            @if (!Auth::user()->isClient())
                                             <td>{{ $appointment->user->name ?? '' }}</td>
+                                            @endif
+
                                             <td>{{ $appointment->subservice->name ?? "" }}</td>
                                             <td>{{ $appointment->date }}</td>
                                             <td>{{ number_format($appointment->subservice->price ?? 0 , 2) }} </td>
@@ -131,8 +137,12 @@
                                 <tfoot>
 
                                         <tr>
+                                            @if (!Auth::user()->isClient())
                                             <th>User</th>
-                                            <th>Name</th>
+                                            @endif
+
+
+                                            <th>Service</th>
                                             <th>Date</th>
                                             <th>Amount</th>
                                             <th>Status</th>
